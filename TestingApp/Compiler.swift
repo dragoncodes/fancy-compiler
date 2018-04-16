@@ -20,6 +20,38 @@ class Compiler {
         self.rulesFilePath = rulesFilePath
     }
 
+    func parseRules() -> Either<CompilerError, [RuleNode]> {
+
+        var rulesResults: Either<CompilerError, [RuleNode]> = Either(nil, nil)
+
+        readFile(rulesFilePath)
+                .foldLeft { error in
+                    rulesResults = Either.fromLeft(error)
+                }
+
+                .foldRight { fileContents -> () in
+
+                    var parsedRuleNodes = [RuleNode]()
+
+                    if fileContents != nil {
+                        fileContents!.split(separator: "\n").forEach { substring in
+
+                            if substring.starts(with: "#") {
+                                return
+                            }
+
+                            let ruleComponents = substring.components(separatedBy: "=>")
+
+                            parsedRuleNodes.append(RuleNode(name: ruleComponents[0], value: ruleComponents[1]))
+                        }
+
+                        rulesResults = Either.fromRight(parsedRuleNodes)
+                    }
+                }
+
+        return rulesResults
+    }
+
     func compile() -> Either<CompilerError, [FancyLanguageNode]> {
         return self.parseInputFiles()
     }
@@ -87,7 +119,7 @@ class Compiler {
         }
     }
 
-    private func readFile(_ inputFilePath: String) -> Either<Error, String> {
+    private func readFile(_ inputFilePath: String) -> Either<CompilerError, String> {
 
         guard let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return Either.fromLeft(CompilerError.invalidInputPath)
@@ -101,7 +133,7 @@ class Compiler {
 
             return Either.fromRight(data)
         } catch {
-            return Either.fromLeft(error)
+            return Either.fromLeft(CompilerError.fileParsingError(message: error.localizedDescription))
         }
     }
 

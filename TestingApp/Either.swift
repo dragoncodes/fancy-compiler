@@ -27,12 +27,12 @@ struct Either<E, T> {
         return nil
     }
 
-    func foldLeft<R>(leftHandler: (E?) -> R) -> R? {
+    func foldLeft(leftHandler: (E?) -> ()) -> Either {
         if (left != nil) {
-            return leftHandler(left)
+            leftHandler(left)
         }
 
-        return nil
+        return self
     }
 
     static func fromRight(_ right: T?) -> Either<E, T> {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		313382107F578D9661D5C909 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133855045E436C11699322A /* Compiler.swift */; };
+		313382A0273221133E350095 /* RuleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133806D72198C99D9EA9458 /* RuleNode.swift */; };
 		3133875DAB937E4314EEB2A2 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133820F0C7E34C2BFB30A2E /* Either.swift */; };
 		313388486F6FB26F2A696E81 /* FancyLanguageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338F4374F28E7E05F8AE92 /* FancyLanguageNode.swift */; };
 		31338E6383D9F9215C7434BC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338E1A0EFB1E8D984DE931 /* main.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3133806D72198C99D9EA9458 /* RuleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleNode.swift; sourceTree = "<group>"; };
 		3133820F0C7E34C2BFB30A2E /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Either.swift; path = TestingApp/Either.swift; sourceTree = "<group>"; };
 		3133829B5169EBEF953D4902 /* TestingApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestingApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		3133855045E436C11699322A /* Compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			children = (
 				31338E1A0EFB1E8D984DE931 /* main.swift */,
 				3133855045E436C11699322A /* Compiler.swift */,
+				3133806D72198C99D9EA9458 /* RuleNode.swift */,
 			);
 			path = TestingApp;
 			sourceTree = "<group>";
@@ -127,6 +130,7 @@
 				313382107F578D9661D5C909 /* Compiler.swift in Sources */,
 				3133875DAB937E4314EEB2A2 /* Either.swift in Sources */,
 				313388486F6FB26F2A696E81 /* FancyLanguageNode.swift in Sources */,
+				313382A0273221133E350095 /* RuleNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
