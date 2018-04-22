@@ -2,6 +2,8 @@ class FancyLanguageNode {
 
     let name: String
 
+    var value: String?
+
     var children: [FancyLanguageNode]
 
     private var attributes: [FancyLanguageProperty]
@@ -36,7 +38,7 @@ class FancyLanguageNode {
 
         // TODO check if the child isn't self
 
-        let isChildContained = children.contains { (definedChild) -> Bool in
+        let isChildContained = children.contains { definedChild -> Bool in
             return definedChild === child
         }
 

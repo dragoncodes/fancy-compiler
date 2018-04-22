@@ -22,30 +22,12 @@ func rightHandler(nodes: [FancyLanguageNode]?) -> String {
 
 let compiler = Compiler(inputFilePaths: ["testData/in.json"], rulesFilePath: "testData/rules.txt")
 
-compiler.parseRules()
-        .foldLeft { error in
-            print(error)
-        }
-        .foldRight { parsedRulesResult in
-            guard let nodes = parsedRulesResult else {
 
-                print("error parsing rules")
+if let parsedRules = compiler.parseRules().right {
 
-                return
-            }
+    let compileResult = compiler.compile().foldRight { nodes -> () in
+        return compiler.run(input: nodes, rules: parsedRules)
+    }
 
+}
 
-            nodes.forEach { node in
-                print(node.description)
-            }
-        }
-
-//let compileResult = compiler.compile()
-//
-//compileResult.fold(leftHandler(error:), { nodes in
-//    let parsedRes = rightHandler(nodes: nodes)
-//
-//    print(parsedRes)
-//
-//    return parsedRes
-//})

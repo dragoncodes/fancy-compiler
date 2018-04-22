@@ -33,21 +33,20 @@ class Compiler {
 
                     var parsedRuleNodes = [RuleNode]()
 
-                    if fileContents != nil {
-                        fileContents!.split(separator: "\n").forEach { substring in
+                    fileContents.split(separator: "\n").forEach { substring in
 
-                            if substring.starts(with: "#") {
-                                return
-                            }
-
-                            let ruleComponents = substring.components(separatedBy: "=>")
-
-                            parsedRuleNodes.append(RuleNode(name: ruleComponents[0], value: ruleComponents[1]))
+                        if substring.starts(with: "#") {
+                            return
                         }
 
-                        rulesResults = Either.fromRight(parsedRuleNodes)
+                        let ruleComponents = substring.components(separatedBy: "=>")
+
+                        parsedRuleNodes.append(RuleNode(name: ruleComponents[0], value: ruleComponents[1]))
                     }
+
+                    rulesResults = Either.fromRight(parsedRuleNodes)
                 }
+
 
         return rulesResults
     }
@@ -68,8 +67,9 @@ class Compiler {
             } else if let fileContents = readFileData.right,
                       let jsonDict = parseJson(from: fileContents).right {
 
-                let parsedResult = jsonDict.compactMap { jsonObj in
-                    result.append(toNode(from: jsonObj))
+                let parsedResult = jsonDict.forEach { key, value in
+
+                    result.append(toNode(from: (key: key, value: value)))
                 }
 
 //                result.append(parsedResult)
@@ -89,8 +89,11 @@ class Compiler {
 
             let childObjects = jsonObj.value as! [String: Any]
 
-            childObjects.forEach { childObj in
-                result.addChild(child: toNode(from: childObj))
+            childObjects.reversed().forEach { childObj in
+
+                let childNode = toNode(from: childObj)
+
+                result.addChild(child: childNode)
             }
         } else if jsonObj.value is String {
 
@@ -98,7 +101,9 @@ class Compiler {
                 let stringValue = try jsonObj.value as! String
 
                 if stringValue.starts(with: "@") {
-//                    result.addProperty(name: stringValue);
+                    result.addAttribute(name: stringValue);
+                } else {
+                    result.value = stringValue
                 }
             }
         }
@@ -125,7 +130,6 @@ class Compiler {
             return Either.fromLeft(CompilerError.invalidInputPath)
         }
 
-
         let fileURL = dir.appendingPathComponent(inputFilePath)
 
         do {
@@ -137,8 +141,44 @@ class Compiler {
         }
     }
 
-    public func run() {
+    public func run(input: [FancyLanguageNode], rules: [RuleNode]) -> Either<CompilerError, String> {
 
+        var output = ""
+
+        var parsedRules: [String: String] = [:]
+
+        rules.forEach { node in
+            parsedRules[node.name] = node.value
+        }
+
+        input.forEach { node in
+            output += parseLanguageNode(node: node, parsedRules: parsedRules)
+        }
+
+        print(output)
+
+        return Either.fromRight(output)
+    }
+
+    private func parseLanguageNode(node: FancyLanguageNode, parsedRules: [String: String]) -> String {
+
+        var output: String = ""
+
+        output += resolveLanguageNode(node: node, parsedRules: parsedRules) + "\n   "
+
+        node.children.forEach { childNode in
+            output += parseLanguageNode(node: childNode, parsedRules: parsedRules)
+        }
+
+        return output
+    }
+
+    private func resolveLanguageNode(node: FancyLanguageNode, parsedRules: [String: String]) -> String {
+        guard let resolvedName = parsedRules[node.name] else {
+            return node.name
+        }
+
+        return resolvedName
     }
 
     enum CompilerError: Error {

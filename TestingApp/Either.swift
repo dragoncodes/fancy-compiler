@@ -19,9 +19,9 @@ struct Either<E, T> {
         leftHandler(error)
     }
 
-    func foldRight<R>(rightHandler: (T?) -> R) -> R? {
-        if (left == nil) {
-            return rightHandler(right)
+    func foldRight<R>(rightHandler: (T) -> R) -> R? {
+        if (left == nil && right != nil) {
+            return rightHandler(right!)
         }
 
         return nil
