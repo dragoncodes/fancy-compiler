@@ -6,7 +6,7 @@ class FancyLanguageNode {
 
     var children: [FancyLanguageNode]
 
-    private var attributes: [FancyLanguageProperty]
+    var attributes: [FancyLanguageProperty]
 
     public var description: String {
 
@@ -49,8 +49,8 @@ class FancyLanguageNode {
         children.append(child)
     }
 
-    func addAttribute(name: String) {
-        attributes.append(FancyLanguageProperty(name: name, value: nil))
+    func addAttribute(name: String, value: String?) {
+        attributes.append(FancyLanguageProperty(name: name, value: value))
     }
 }
 

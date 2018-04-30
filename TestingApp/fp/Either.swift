@@ -1,4 +1,4 @@
-struct Either<E, T> {
+class Either<E, T> {
     let left: E?
 
     let right: T?

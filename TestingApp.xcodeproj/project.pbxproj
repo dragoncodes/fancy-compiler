@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		313382107F578D9661D5C909 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133855045E436C11699322A /* Compiler.swift */; };
-		313382A0273221133E350095 /* RuleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133806D72198C99D9EA9458 /* RuleNode.swift */; };
-		3133875DAB937E4314EEB2A2 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133820F0C7E34C2BFB30A2E /* Either.swift */; };
-		313388486F6FB26F2A696E81 /* FancyLanguageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338F4374F28E7E05F8AE92 /* FancyLanguageNode.swift */; };
+		313384624B12DA658B84148C /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133873460C999D4EFE2DDCF /* Rules.swift */; };
+		3133849B4A5A4D2A006C4139 /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313385FC17E5999DB7C4DEF6 /* Runner.swift */; };
+		313384AC4AAFB496363728A6 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313389FA987FB9CA0FA1EED6 /* File.swift */; };
+		313386C99F95081D6194BCE2 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338DD1E7A3F5DDCBE8A9D5 /* Either.swift */; };
+		3133890BCFCC558B7C36384C /* Linker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3133872223A08A15EA435EEC /* Linker.swift */; };
+		3133896B75CB122815B13A04 /* Compiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313385B2B2F94CEEA4256F7E /* Compiler.swift */; };
+		31338C22744C37792F63BC4A /* RuleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338A1D0CEB4FF072B836A8 /* RuleNode.swift */; };
 		31338E6383D9F9215C7434BC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338E1A0EFB1E8D984DE931 /* main.swift */; };
+		31338FC03C6399E10A8C783C /* FancyLanguageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31338DBAB352CFF3C813A287 /* FancyLanguageNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,13 +31,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3133806D72198C99D9EA9458 /* RuleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleNode.swift; sourceTree = "<group>"; };
-		3133820F0C7E34C2BFB30A2E /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Either.swift; path = TestingApp/Either.swift; sourceTree = "<group>"; };
 		3133829B5169EBEF953D4902 /* TestingApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TestingApp; sourceTree = BUILT_PRODUCTS_DIR; };
-		3133855045E436C11699322A /* Compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compiler.swift; sourceTree = "<group>"; };
+		313385B2B2F94CEEA4256F7E /* Compiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Compiler.swift; path = core/Compiler.swift; sourceTree = "<group>"; };
+		313385FC17E5999DB7C4DEF6 /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Runner.swift; path = core/Runner.swift; sourceTree = "<group>"; };
+		3133872223A08A15EA435EEC /* Linker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Linker.swift; path = core/Linker.swift; sourceTree = "<group>"; };
+		3133873460C999D4EFE2DDCF /* Rules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Rules.swift; path = core/Rules.swift; sourceTree = "<group>"; };
 		313388F5CCFFEE86537DBD5C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
+		313389FA987FB9CA0FA1EED6 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = utils/File.swift; sourceTree = "<group>"; };
+		31338A1D0CEB4FF072B836A8 /* RuleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RuleNode.swift; path = nodes/RuleNode.swift; sourceTree = "<group>"; };
+		31338DBAB352CFF3C813A287 /* FancyLanguageNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FancyLanguageNode.swift; path = nodes/FancyLanguageNode.swift; sourceTree = "<group>"; };
+		31338DD1E7A3F5DDCBE8A9D5 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Either.swift; path = fp/Either.swift; sourceTree = "<group>"; };
 		31338E1A0EFB1E8D984DE931 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		31338F4374F28E7E05F8AE92 /* FancyLanguageNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FancyLanguageNode.swift; path = TestingApp/FancyLanguageNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +59,14 @@
 			isa = PBXGroup;
 			children = (
 				31338E1A0EFB1E8D984DE931 /* main.swift */,
-				3133855045E436C11699322A /* Compiler.swift */,
-				3133806D72198C99D9EA9458 /* RuleNode.swift */,
+				313389FA987FB9CA0FA1EED6 /* File.swift */,
+				31338DD1E7A3F5DDCBE8A9D5 /* Either.swift */,
+				3133872223A08A15EA435EEC /* Linker.swift */,
+				313385B2B2F94CEEA4256F7E /* Compiler.swift */,
+				3133873460C999D4EFE2DDCF /* Rules.swift */,
+				31338A1D0CEB4FF072B836A8 /* RuleNode.swift */,
+				31338DBAB352CFF3C813A287 /* FancyLanguageNode.swift */,
+				313385FC17E5999DB7C4DEF6 /* Runner.swift */,
 			);
 			path = TestingApp;
 			sourceTree = "<group>";
@@ -70,8 +84,6 @@
 			children = (
 				313387F7FEFDF03F31758B24 /* Products */,
 				313383FD2E1BA1D2A0D308BD /* TestingApp */,
-				3133820F0C7E34C2BFB30A2E /* Either.swift */,
-				31338F4374F28E7E05F8AE92 /* FancyLanguageNode.swift */,
 				313388F5CCFFEE86537DBD5C /* .gitignore */,
 			);
 			sourceTree = "<group>";
@@ -127,10 +139,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				31338E6383D9F9215C7434BC /* main.swift in Sources */,
-				313382107F578D9661D5C909 /* Compiler.swift in Sources */,
-				3133875DAB937E4314EEB2A2 /* Either.swift in Sources */,
-				313388486F6FB26F2A696E81 /* FancyLanguageNode.swift in Sources */,
-				313382A0273221133E350095 /* RuleNode.swift in Sources */,
+				313384AC4AAFB496363728A6 /* File.swift in Sources */,
+				313386C99F95081D6194BCE2 /* Either.swift in Sources */,
+				3133890BCFCC558B7C36384C /* Linker.swift in Sources */,
+				3133896B75CB122815B13A04 /* Compiler.swift in Sources */,
+				313384624B12DA658B84148C /* Rules.swift in Sources */,
+				31338C22744C37792F63BC4A /* RuleNode.swift in Sources */,
+				31338FC03C6399E10A8C783C /* FancyLanguageNode.swift in Sources */,
+				3133849B4A5A4D2A006C4139 /* Runner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
