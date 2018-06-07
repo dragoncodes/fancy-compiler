@@ -1,3 +1,6 @@
+/**
+A simple class that represents either an error type (on the left) or a success type (on the right)
+*/
 class Either<E, T> {
     let left: E?
 
@@ -27,9 +30,9 @@ class Either<E, T> {
         return nil
     }
 
-    func foldLeft(leftHandler: (E?) -> ()) -> Either {
+    func foldLeft(leftHandler: (E) -> ()) -> Either {
         if (left != nil) {
-            leftHandler(left)
+            leftHandler(left!)
         }
 
         return self

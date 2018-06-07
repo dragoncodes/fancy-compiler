@@ -22,42 +22,38 @@ class Compiler {
 
     private func parseInputFiles() -> Either<CompilerError, [FancyLanguageNode]> {
 
-
         var result = [FancyLanguageNode]()
 
         let readFileData = readFile(inputFile)
 
-        if let error = readFileData.left {
-            print("error", error)
-        } else if let fileContents = readFileData.right,
-                  let jsonDict = parseJson(from: fileContents).right {
+        guard let fileContents = readFileData.right,
+              let jsonDict = parseJson(from: fileContents).right else {
 
-            jsonDict.forEach { key, value in
+            return Either.fromLeft(CompilerError.fileParsingError(message: "Error reading file"))
+        }
 
-                print("Compilation \(key) \(value)")
+        jsonDict.forEach { key, value in
 
-                let node = toNode(from: (key: key, value: value))
+            let node = fancyNode(from: (key: key, value: value))
 
-                result.append(node)
-            }
+            result.append(node)
         }
 
         return Either.fromRight(result)
     }
 
-    private func toNode(from jsonObj: JsonNode) -> FancyLanguageNode {
+    private func fancyNode(from jsonObj: JsonNode) -> FancyLanguageNode {
 
-        // TODO swiftify this
+        let result = FancyLanguageNode(name: jsonObj.key)
 
-        var result = FancyLanguageNode(name: jsonObj.key)
+        switch jsonObj.value {
 
-        if jsonObj.value is [String: Any] {
-
+        case is [String: Any]:
             let childObjects = jsonObj.value as! [String: Any]
 
             childObjects.reversed().forEach { childObj in
 
-                let childNode = toNode(from: childObj)
+                let childNode = fancyNode(from: childObj)
 
                 if childNode.name.starts(with: "@") {
                     result.addAttribute(name: childNode.name, value: childNode.value)
@@ -65,22 +61,28 @@ class Compiler {
                     result.addChild(child: childNode)
                 }
             }
-        } else if jsonObj.value is Array<[String: Any]>,
-                  let children = jsonObj.value as? Array<[String: Any]> {
+        case is Array<[String: Any]>:
+
+            guard let children = jsonObj.value as? Array<[String: Any]> else {
+                break
+            }
 
             for childObj in children {
-                let child = toNode(from: (key: "", value: childObj))
+                let child = fancyNode(from: (key: "", value: childObj))
 
                 result.addChild(child: child)
             }
 
-        } else if jsonObj.value is String {
+        case is String:
 
-            do {
-                let stringValue = jsonObj.value as! String
-
-                result.value = stringValue
+            guard let stringValue = jsonObj.value as? String else {
+                break
             }
+
+            result.value = stringValue
+
+        default:
+            break
         }
 
         return result

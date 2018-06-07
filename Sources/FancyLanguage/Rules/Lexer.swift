@@ -54,13 +54,13 @@ class Lexer {
     }
 
     func advanceIndex() {
-        input.characters.formIndex(after: &index)
+        input.formIndex(after: &index)
     }
 
     func readIdentifierOrNumber() -> String {
         var str = ""
         while let char = currentChar, char.isAlphanumeric || char == "." {
-            str.characters.append(char)
+            str.append(char)
             advanceIndex()
         }
         return str
@@ -116,10 +116,10 @@ class Lexer {
     }
 
     func lex() -> [Token] {
-        var toks = [Token]()
+        var tokes = [Token]()
         while let tok = advanceToNextToken() {
-            toks.append(tok)
+            tokes.append(tok)
         }
-        return toks
+        return tokes
     }
 }
